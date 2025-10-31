@@ -7,6 +7,7 @@ interface InputProps {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     className?: string;
     required?: boolean;
+    step?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -16,6 +17,7 @@ const Input: React.FC<InputProps> = ({
     onChange,
     className = "",
     required = false,
+    step,
 }) => {
     return (
         <input
@@ -24,6 +26,7 @@ const Input: React.FC<InputProps> = ({
             value={value}
             onChange={onChange}
             required={required}
+            step={step}
             className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${className}`}
         />
     );

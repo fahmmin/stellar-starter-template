@@ -19,11 +19,11 @@ const SendPaymentForm: React.FC<SendPaymentFormProps> = ({ onSubmit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
             <div>
                 <label
                     htmlFor="destination"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
                 >
                     Destination Address
                 </label>
@@ -33,24 +33,42 @@ const SendPaymentForm: React.FC<SendPaymentFormProps> = ({ onSubmit }) => {
                     value={destination}
                     required
                     onChange={(e) => setDestination(e.target.value)}
+                    className="focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                 />
+                <p className="mt-1 text-xs text-gray-500">
+                    Enter a valid Stellar address (starts with G, 56 characters)
+                </p>
             </div>
             <div>
                 <label
                     htmlFor="amount"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
                 >
                     Amount (XLM)
                 </label>
-                <Input
-                    type="number"
-                    placeholder="0.0"
-                    value={amount}
-                    required
-                    onChange={(e) => setAmount(e.target.value)}
-                />
+                <div className="relative">
+                    <Input
+                        type="number"
+                        step="0.0000001"
+                        placeholder="0.0"
+                        value={amount}
+                        required
+                        onChange={(e) => setAmount(e.target.value)}
+                        className="focus:ring-2 focus:ring-purple-500 focus:border-purple-500 pr-16"
+                    />
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                        <span className="text-gray-500 font-medium">XLM</span>
+                    </div>
+                </div>
+                <p className="mt-1 text-xs text-gray-500">
+                    Minimum: 0.0000001 XLM
+                </p>
             </div>
-            <Button type="submit" disabled={!destination || !amount}>
+            <Button
+                type="submit"
+                disabled={!destination || !amount}
+                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed py-3 text-lg"
+            >
                 Send Payment
             </Button>
         </form>
